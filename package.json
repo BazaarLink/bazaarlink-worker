@@ -1,0 +1,27 @@
+{
+  "name": "bazaarlink-worker",
+  "version": "0.1.0",
+  "description": "BazaarLink Worker Agent — connect your GPU to the BazaarLink network",
+  "main": "dist/index.js",
+  "bin": {
+    "bazaarlink-worker": "dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "prepare": "tsc"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": ["bazaarlink", "worker", "ai", "llm", "ollama", "gpu"],
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^12.1.0",
+    "ws": "^8.19.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/ws": "^8.18.1",
+    "typescript": "^5"
+  }
+}
