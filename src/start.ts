@@ -112,6 +112,8 @@ function connectAndRun(): void {
         token,
         models: config.models,
         maxConcurrent: config.maxConcurrent,
+        inputPricePerM: config.inputPricePerM,
+        outputPricePerM: config.outputPricePerM,
       }));
     } catch (err) {
       console.error("[auth]", (err as Error).message);
@@ -174,12 +176,18 @@ function connectAndRun(): void {
 export async function start(): Promise<void> {
   const config = loadConfig();
 
+  if (config.inputPricePerM === undefined || config.outputPricePerM === undefined) {
+    console.error("Error: Pricing not configured. Please re-run 'bazaarlink-worker login' with --input-price and --output-price.");
+    process.exit(1);
+  }
+
   console.log("BazaarLink Worker Agent");
   console.log("=======================");
   console.log(`Gateway:     ${config.gatewayUrl}`);
   console.log(`Ollama:      ${config.ollamaUrl}`);
   console.log(`Models:      ${config.models.join(", ")}`);
   console.log(`MaxConc:     ${config.maxConcurrent}`);
+  console.log(`Pricing:     input $${config.inputPricePerM}/1M  output $${config.outputPricePerM}/1M`);
   console.log("");
 
   // Test Ollama reachability

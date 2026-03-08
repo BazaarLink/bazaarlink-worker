@@ -6,6 +6,8 @@ export interface LoginOptions {
   models: string;
   maxConcurrent: number;
   ollamaUrl: string;
+  inputPricePerM?: number;
+  outputPricePerM?: number;
 }
 
 export async function login(opts: LoginOptions): Promise<void> {
@@ -36,6 +38,8 @@ export async function login(opts: LoginOptions): Promise<void> {
     models: opts.models.split(",").map((m) => m.trim()).filter(Boolean),
     maxConcurrent: opts.maxConcurrent,
     ollamaUrl: opts.ollamaUrl,
+    ...(opts.inputPricePerM !== undefined && { inputPricePerM: opts.inputPricePerM }),
+    ...(opts.outputPricePerM !== undefined && { outputPricePerM: opts.outputPricePerM }),
   });
 
   console.log("✓ Login successful! Credentials stored at ~/.bazaarlink/config.json");

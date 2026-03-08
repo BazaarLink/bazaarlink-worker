@@ -33,6 +33,7 @@ export async function runOllamaStream(
       model: ollamaModel,
       messages,
       stream: true,
+      think: false,   // disable thinking/reasoning mode for community models
       options: {
         temperature: (options.temperature as number) ?? 0.7,
         ...(options.top_p !== undefined && { top_p: options.top_p }),
